@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-    snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Snippet.objects.all())
+    snippets = serializers.PrimaryKeyRelatedField(many=True,
+                                                  queryset=Snippet.objects.all())
 
     class Meta:
         model = User
@@ -14,5 +15,11 @@ class UserSerializer(serializers.ModelSerializer):
 class SnippetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Snippet
-        fields = ('id', 'title', 'code', 'linenos', 'language', 'style','owner')
+        fields = ('id',
+                  'title',
+                  'code',
+                  'linenos',
+                  'language',
+                  'style',
+                  'owner',)
         owner = serializers.ReadOnlyField(source='owner.username')
